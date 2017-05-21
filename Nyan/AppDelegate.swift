@@ -3,7 +3,7 @@
 //  Nyan
 //
 //  Created by Kazuyoshi Aizawa on 2017/03/19.
-//  Copyright © 2017年 Kazuyoshi Aizawa. All rights reserved.
+//  Copyright © 2017 Kazuyoshi Aizawa. All rights reserved.
 //
 
 import UIKit
@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+
+        //reload account
+        AccountManager.sharedInstance.requestAccounts()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

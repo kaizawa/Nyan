@@ -7,21 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A26ED5C1EB44B1700E80A8A /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A26ED5B1EB44B1700E80A8A /* ConfigViewController.swift */; };
+		8A26ED5E1EB4877B00E80A8A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A26ED5D1EB4877B00E80A8A /* Config.swift */; };
+		8A26ED601EB4B01500E80A8A /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A26ED5F1EB4B01500E80A8A /* DefaultViewController.swift */; };
+		8A2F67F91E7E1B38007C27EF /* NyanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F67F81E7E1B38007C27EF /* NyanViewController.swift */; };
+		8A2F67FB1E7E2F47007C27EF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F67FA1E7E2F47007C27EF /* Accounts.framework */; };
+		8A2F67FD1E7E7C90007C27EF /* NyanUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */; };
+		8A6FA0501EB5853700653C22 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6FA04F1EB5853700653C22 /* AccountManager.swift */; };
 		8AFF16851E7E0E41001FE04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF16841E7E0E41001FE04E /* AppDelegate.swift */; };
-		8AFF16871E7E0E41001FE04E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF16861E7E0E41001FE04E /* ViewController.swift */; };
 		8AFF168A1E7E0E41001FE04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF16881E7E0E41001FE04E /* Main.storyboard */; };
 		8AFF168C1E7E0E41001FE04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF168B1E7E0E41001FE04E /* Assets.xcassets */; };
 		8AFF168F1E7E0E41001FE04E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF168D1E7E0E41001FE04E /* LaunchScreen.storyboard */; };
+		8AFF16981E7E1014001FE04E /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AFF16971E7E1014001FE04E /* Twitter.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A26ED5B1EB44B1700E80A8A /* ConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
+		8A26ED5D1EB4877B00E80A8A /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		8A26ED5F1EB4B01500E80A8A /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
+		8A2F67F81E7E1B38007C27EF /* NyanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NyanViewController.swift; sourceTree = "<group>"; };
+		8A2F67FA1E7E2F47007C27EF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NyanUIView.swift; sourceTree = "<group>"; };
+		8A6FA04F1EB5853700653C22 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		8AFF16811E7E0E41001FE04E /* Nyan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AFF16841E7E0E41001FE04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8AFF16861E7E0E41001FE04E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8AFF16891E7E0E41001FE04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8AFF168B1E7E0E41001FE04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8AFF168E1E7E0E41001FE04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8AFF16901E7E0E41001FE04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AFF16971E7E1014001FE04E /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A2F67FB1E7E2F47007C27EF /* Accounts.framework in Frameworks */,
+				8AFF16981E7E1014001FE04E /* Twitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +56,7 @@
 			children = (
 				8AFF16831E7E0E41001FE04E /* Nyan */,
 				8AFF16821E7E0E41001FE04E /* Products */,
+				8AFF16961E7E1014001FE04E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +72,27 @@
 			isa = PBXGroup;
 			children = (
 				8AFF16841E7E0E41001FE04E /* AppDelegate.swift */,
-				8AFF16861E7E0E41001FE04E /* ViewController.swift */,
 				8AFF16881E7E0E41001FE04E /* Main.storyboard */,
+				8A26ED5B1EB44B1700E80A8A /* ConfigViewController.swift */,
+				8A26ED5D1EB4877B00E80A8A /* Config.swift */,
 				8AFF168B1E7E0E41001FE04E /* Assets.xcassets */,
 				8AFF168D1E7E0E41001FE04E /* LaunchScreen.storyboard */,
 				8AFF16901E7E0E41001FE04E /* Info.plist */,
+				8A2F67F81E7E1B38007C27EF /* NyanViewController.swift */,
+				8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */,
+				8A26ED5F1EB4B01500E80A8A /* DefaultViewController.swift */,
+				8A6FA04F1EB5853700653C22 /* AccountManager.swift */,
 			);
 			path = Nyan;
+			sourceTree = "<group>";
+		};
+		8AFF16961E7E1014001FE04E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A2F67FA1E7E2F47007C27EF /* Accounts.framework */,
+				8AFF16971E7E1014001FE04E /* Twitter.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +168,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AFF16871E7E0E41001FE04E /* ViewController.swift in Sources */,
+				8A26ED601EB4B01500E80A8A /* DefaultViewController.swift in Sources */,
+				8A6FA0501EB5853700653C22 /* AccountManager.swift in Sources */,
+				8A2F67F91E7E1B38007C27EF /* NyanViewController.swift in Sources */,
 				8AFF16851E7E0E41001FE04E /* AppDelegate.swift in Sources */,
+				8A26ED5E1EB4877B00E80A8A /* Config.swift in Sources */,
+				8A26ED5C1EB44B1700E80A8A /* ConfigViewController.swift in Sources */,
+				8A2F67FD1E7E7C90007C27EF /* NyanUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,11 +295,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 469ZL76DAW;
 				INFOPLIST_FILE = Nyan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cafeform.Nyan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cafeform.Nyhaan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -272,11 +313,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 469ZL76DAW;
 				INFOPLIST_FILE = Nyan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cafeform.Nyan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cafeform.Nyhaan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -300,6 +346,7 @@
 				8AFF16951E7E0E41001FE04E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

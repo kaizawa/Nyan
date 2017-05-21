@@ -3,33 +3,35 @@
 //  Nyan
 //
 //  Created by Kazuyoshi Aizawa on 2017/04/29.
-//  Copyright © 2017年 Kazuyoshi Aizawa. All rights reserved.
+//  Copyright © 2017 Kazuyoshi Aizawa. All rights reserved.
 //
 
 import UIKit
 
 class DefaultViewController: UIViewController {
+    
+    let config:Config = Config.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let storyboard: UIStoryboard = self.storyboard!
+        
+        if(self.config.tweetOnBoot) {
+            let nextView = storyboard.instantiateViewController(withIdentifier: "nyan") as! NyanViewController
+            self.present(nextView, animated: false, completion: nil)
+        } else {
+            let nextView = storyboard.instantiateViewController(withIdentifier: "config") as! ConfigViewController
+            self.present(nextView, animated: false, completion: nil)
+        }
     }
-    */
-
+    
 }
