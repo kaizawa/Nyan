@@ -43,6 +43,7 @@ class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 // set 1st account for now
                 account.text = accountManager.accounts.first?.username
                 accountRow = 0
+                config.setAccount(newVal: account.text!)
             }
         } else {
             for index in 0..<accountManager.accounts.count {
