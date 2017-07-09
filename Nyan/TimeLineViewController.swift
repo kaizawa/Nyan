@@ -110,20 +110,68 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let row = indexPath.row
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         
-        cell.detailTextLabel?.text = timeline[row]["text"] as? String
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as? TweetCell else {
+            return UITableViewCell()
+        }
+        
+        
+        // ステータス
+        cell.status?.text = timeline[row]["text"] as? String
+
         // ユーザ
         let user = timeline[row]["user"] as? [String: Any]
-        cell.textLabel?.text = user?["name"] as? String
+        cell.tweet = timeline[row] as? [String:Any]
         
-        /* アイコンの表示 ! 
-         use?["profile_image_url"] as? String で イメージのURLをとってこれる
-         https://dev.twitter.com/rest/reference/get/statuses/home_timeline
+        cell.name?.text = user?["name"] as? String
 
-         */
+        // アイコンのURLをとってきてプロトコルをHTTPに変更
+        let urlString = (user?["profile_image_url_https"] as! String)
+
+        // キャッシュしているアイコンを取得
+        if let cacheImage = self.config.iconCache.object(forKey: urlString as AnyObject) {
+            // キャッシュ画像の設定
+            cell.icon.image = cacheImage
+            return cell
+        }
         
-        //cell.imageView?.image = UIImage(na)
+        // アイコンはキャッシュに存在しない
+        guard let url = URL(string: urlString) else {
+            // urlが生成できなかった
+            return cell
+        }
+        
+        let request = URLRequest(url: url)
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) {
+            (data:Data?, response:URLResponse?, error:Error?) in
+
+            guard error == nil else {
+
+                return
+            }
+            
+            guard let data = data else {
+
+                return
+            }
+            
+            guard let image = UIImage(data: data) else {
+
+                return
+            }
+            
+            // ダウンロードしたアイコンをキャッシュする
+            self.config.iconCache.setObject(image, forKey: urlString as AnyObject)
+            
+            // メインスレッドで表示
+            DispatchQueue.main.async {
+                cell.icon.image = image
+            }
+        }
+        // 画像の読み込み処理開始
+        task.resume()
         
         return cell
     }
@@ -134,5 +182,15 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath)
     {
         print(timeline[indexPath.row]["text"] as? String ?? "")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let cell = sender as? TweetCell {
+
+            if let tweetViewController = segue.destination as? TweetViewController {
+                tweetViewController.tweet = cell.tweet
+            }
+        }
     }
 }

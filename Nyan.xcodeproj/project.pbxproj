@@ -15,6 +15,10 @@
 		8A2F67FD1E7E7C90007C27EF /* NyanUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */; };
 		8A6FA0501EB5853700653C22 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6FA04F1EB5853700653C22 /* AccountManager.swift */; };
 		8A7B69371EFF7DA700A5D209 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B69361EFF7DA700A5D209 /* TimeLineViewController.swift */; };
+		8A7B69391F0D2C5100A5D209 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B69381F0D2C5100A5D209 /* TweetCell.swift */; };
+		8A7B693B1F11EDB600A5D209 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B693A1F11EDB600A5D209 /* TweetViewController.swift */; };
+		8A7B693D1F1223F500A5D209 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B693C1F1223F500A5D209 /* ReplyViewController.swift */; };
+		8A7B693F1F12566A00A5D209 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B693E1F12566A00A5D209 /* CustomNavigationBar.swift */; };
 		8AFF16851E7E0E41001FE04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF16841E7E0E41001FE04E /* AppDelegate.swift */; };
 		8AFF168A1E7E0E41001FE04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF16881E7E0E41001FE04E /* Main.storyboard */; };
 		8AFF168C1E7E0E41001FE04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF168B1E7E0E41001FE04E /* Assets.xcassets */; };
@@ -30,6 +34,10 @@
 		8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NyanUIView.swift; sourceTree = "<group>"; };
 		8A6FA04F1EB5853700653C22 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		8A7B69361EFF7DA700A5D209 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
+		8A7B69381F0D2C5100A5D209 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		8A7B693A1F11EDB600A5D209 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
+		8A7B693C1F1223F500A5D209 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
+		8A7B693E1F12566A00A5D209 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		8AFF16811E7E0E41001FE04E /* Nyan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AFF16841E7E0E41001FE04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AFF16891E7E0E41001FE04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,10 +84,14 @@
 				8AFF16841E7E0E41001FE04E /* AppDelegate.swift */,
 				8A26ED5D1EB4877B00E80A8A /* Config.swift */,
 				8A26ED5B1EB44B1700E80A8A /* ConfigViewController.swift */,
+				8A7B693E1F12566A00A5D209 /* CustomNavigationBar.swift */,
 				8A26ED5F1EB4B01500E80A8A /* DefaultViewController.swift */,
 				8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */,
 				8A2F67F81E7E1B38007C27EF /* NyanViewController.swift */,
+				8A7B693C1F1223F500A5D209 /* ReplyViewController.swift */,
 				8A7B69361EFF7DA700A5D209 /* TimeLineViewController.swift */,
+				8A7B69381F0D2C5100A5D209 /* TweetCell.swift */,
+				8A7B693A1F11EDB600A5D209 /* TweetViewController.swift */,
 				8AFF168B1E7E0E41001FE04E /* Assets.xcassets */,
 				8AFF16881E7E0E41001FE04E /* Main.storyboard */,
 			);
@@ -167,14 +179,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A7B693F1F12566A00A5D209 /* CustomNavigationBar.swift in Sources */,
 				8A26ED601EB4B01500E80A8A /* DefaultViewController.swift in Sources */,
 				8A6FA0501EB5853700653C22 /* AccountManager.swift in Sources */,
 				8A2F67F91E7E1B38007C27EF /* NyanViewController.swift in Sources */,
+				8A7B69391F0D2C5100A5D209 /* TweetCell.swift in Sources */,
+				8A7B693B1F11EDB600A5D209 /* TweetViewController.swift in Sources */,
 				8AFF16851E7E0E41001FE04E /* AppDelegate.swift in Sources */,
 				8A26ED5E1EB4877B00E80A8A /* Config.swift in Sources */,
 				8A7B69371EFF7DA700A5D209 /* TimeLineViewController.swift in Sources */,
 				8A26ED5C1EB44B1700E80A8A /* ConfigViewController.swift in Sources */,
 				8A2F67FD1E7E7C90007C27EF /* NyanUIView.swift in Sources */,
+				8A7B693D1F1223F500A5D209 /* ReplyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

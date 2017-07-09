@@ -8,7 +8,6 @@
 
 import Foundation
 import Accounts
-import Foundation
 
 class AccountManager {
     

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Config {
     
@@ -16,13 +17,13 @@ class Config {
     var autoExit:Bool
     var message:String
     var account:String?
-    
     let TWEET_ON_BOOT_NAME:String = "tweetOnBoot"
     let AUTO_EXIT_NAME:String = "autoExit"
     let MESSAGE_NAME:String = "message"
     let ACCOUNT_NAME:String = "account"
-
     let DEFAULT_MESSAGE:String = "にゃーん"
+    var iconCache = NSCache<AnyObject, UIImage>()
+
 
     let userDefaults = UserDefaults.standard
     
