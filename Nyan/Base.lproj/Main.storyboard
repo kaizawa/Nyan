@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2sQ-8f-VFR">
-    <device id="retina3_5" orientation="portrait">
+    <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,29 +19,29 @@
                         <viewControllerLayoutGuide type="bottom" id="lvW-2S-4Iy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="I6P-Yh-87j">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ツイート後に終了" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gn-x2-rff">
-                                <rect key="frame" x="17" y="268" width="147" height="22"/>
+                                <rect key="frame" x="21" y="268" width="147" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aDX-nI-mZv">
-                                <rect key="frame" x="248" y="205" width="51" height="31"/>
+                                <rect key="frame" x="252" y="205" width="51" height="31"/>
                                 <connections>
                                     <action selector="tweetOnBootSwitchAction:" destination="4NX-Lz-x4Z" eventType="valueChanged" id="5YX-Wh-U3B"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4vv-HE-cIk">
-                                <rect key="frame" x="248" y="264" width="51" height="31"/>
+                                <rect key="frame" x="252" y="264" width="51" height="31"/>
                                 <connections>
                                     <action selector="autoExitSwitchAction:" destination="4NX-Lz-x4Z" eventType="valueChanged" id="yXC-l3-yLu"/>
                                 </connections>
                             </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="にゃーん" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="np1-f6-xnr">
-                                <rect key="frame" x="16" y="167" width="288" height="30"/>
+                                <rect key="frame" x="20" y="167" width="984" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -50,7 +50,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="メッセージ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgt-lw-QdF">
-                                <rect key="frame" x="16" y="138" width="112" height="21"/>
+                                <rect key="frame" x="20" y="138" width="112" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="NJ3-5D-oMa"/>
                                 </constraints>
@@ -59,13 +59,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A5S-r7-otk">
-                                <rect key="frame" x="16" y="100" width="288" height="30"/>
+                                <rect key="frame" x="20" y="100" width="984" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xy5-HK-TUX">
-                                <rect key="frame" x="76" y="326" width="168" height="33"/>
+                                <rect key="frame" x="80" y="326" width="864" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="Qga-Nm-VMo"/>
                                 </constraints>
@@ -78,13 +78,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起動時にツイート" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbg-h1-sOb">
-                                <rect key="frame" x="23" y="205" width="227" height="22"/>
+                                <rect key="frame" x="27" y="205" width="923" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLX-4x-4bI">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <items>
+                                    <navigationItem title="設定" id="A2M-G6-xBe"/>
+                                </items>
+                            </navigationBar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trk-3u-6Hy">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="1322" width="1024" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="flexibleSpace" id="Nr4-qf-Fz6"/>
                                     <barButtonItem title="タイムライン" id="TSH-SL-dRA">
@@ -95,17 +101,11 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウント" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryp-kC-4Ui">
-                                <rect key="frame" x="16" y="70" width="92" height="22"/>
+                                <rect key="frame" x="20" y="70" width="92" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLX-4x-4bI">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="設定" id="A2M-G6-xBe"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -126,9 +126,9 @@
                             <constraint firstItem="gbg-h1-sOb" firstAttribute="leading" secondItem="I6P-Yh-87j" secondAttribute="leadingMargin" constant="7" id="abM-fV-Dbx"/>
                             <constraint firstItem="Xy5-HK-TUX" firstAttribute="leading" secondItem="I6P-Yh-87j" secondAttribute="leadingMargin" constant="60" id="bOq-Dt-lQa"/>
                             <constraint firstItem="fLX-4x-4bI" firstAttribute="leading" secondItem="Trk-3u-6Hy" secondAttribute="leading" id="eig-Ok-USp"/>
-                            <constraint firstItem="fLX-4x-4bI" firstAttribute="top" secondItem="I6P-Yh-87j" secondAttribute="top" id="f0R-S5-IRY"/>
                             <constraint firstItem="Xy5-HK-TUX" firstAttribute="centerX" secondItem="Trk-3u-6Hy" secondAttribute="centerX" id="fC0-5h-8hK"/>
                             <constraint firstItem="gbg-h1-sOb" firstAttribute="top" secondItem="aDX-nI-mZv" secondAttribute="top" id="kI8-xM-d9O"/>
+                            <constraint firstItem="fLX-4x-4bI" firstAttribute="top" secondItem="I6P-Yh-87j" secondAttribute="top" id="m8A-WB-agw"/>
                             <constraint firstItem="4vv-HE-cIk" firstAttribute="leading" secondItem="3gn-x2-rff" secondAttribute="trailing" constant="84" id="oMq-Z8-gxe"/>
                             <constraint firstItem="Ryp-kC-4Ui" firstAttribute="leading" secondItem="I6P-Yh-87j" secondAttribute="leadingMargin" id="qEb-cC-AhJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gbg-h1-sOb" secondAttribute="trailing" constant="54" id="qIc-Em-Thq"/>
@@ -159,7 +159,7 @@
                         <viewControllerLayoutGuide type="bottom" id="LPO-iR-HLd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="e4h-q1-wun">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -177,21 +177,21 @@
                         <viewControllerLayoutGuide type="bottom" id="SUq-ZJ-cwG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6kP-7G-VXB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="r7w-7Y-Vjm">
-                                <rect key="frame" x="0.0" y="44" width="320" height="392"/>
+                                <rect key="frame" x="0.0" y="44" width="1024" height="1278"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="wJB-an-aaU"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tweetCell" id="X19-Ej-b55" customClass="TweetCell" customModule="Nyan" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="320" height="90"/>
+                                        <rect key="frame" x="0.0" y="1" width="1024" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="X19-Ej-b55" id="q5u-La-hnf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WEh-hw-hgi">
@@ -202,13 +202,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="アカウント" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d27-F5-25U">
-                                                    <rect key="frame" x="88" y="10" width="214" height="21"/>
+                                                    <rect key="frame" x="88" y="10" width="918" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ツイート" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyc-7w-eTX">
-                                                    <rect key="frame" x="88" y="80.666666666666671" width="214" height="21"/>
+                                                    <rect key="frame" x="88" y="80.666666666666671" width="918" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -238,20 +238,20 @@
                                 </prototypes>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPe-9t-jtm">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <items>
                                     <navigationItem title="タイムライン" id="0oc-c8-SMJ"/>
                                 </items>
                             </navigationBar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uXR-Ow-STa">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="1322" width="1024" height="44"/>
                                 <items>
+                                    <barButtonItem systemItem="flexibleSpace" id="Fh2-mt-SNg"/>
                                     <barButtonItem systemItem="compose" id="LzU-uv-W8t">
                                         <connections>
                                             <segue destination="4NX-Lz-x4Z" kind="show" id="pYv-K7-Sxb"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ca4-yp-d6Y"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -286,11 +286,11 @@
                         <viewControllerLayoutGuide type="bottom" id="DyM-B1-Ek1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1OK-UG-Htl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RaQ-ws-UyR">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="1322" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="J4W-xk-M5W"/>
@@ -302,23 +302,23 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jSq-72-6A8">
-                                <rect key="frame" x="26" y="64" width="268" height="30"/>
+                                <rect key="frame" x="30" y="64" width="964" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0B-Zk-WbN">
-                                <rect key="frame" x="208" y="114" width="86" height="38"/>
+                                <rect key="frame" x="908" y="114" width="86" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="ツイート">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="sendReply:" destination="NTj-tX-jah" eventType="touchUpInside" id="oMB-zV-ghp"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdZ-w9-kj9">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <items>
                                     <navigationItem title="返信" id="Lf5-cY-RF1"/>
                                 </items>
@@ -363,32 +363,32 @@
                         <viewControllerLayoutGuide type="bottom" id="9Dl-0i-oWU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="65q-EV-ggh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bty-Fm-bhB">
-                                <rect key="frame" x="26" y="54" width="224.5" height="37.5"/>
+                                <rect key="frame" x="30" y="54" width="920.5" height="37.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="screen name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJu-rD-bVX">
-                                <rect key="frame" x="260.5" y="54" width="98.5" height="21"/>
+                                <rect key="frame" x="960.5" y="54" width="98.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKg-be-kS6">
-                                <rect key="frame" x="260.5" y="75" width="42.5" height="21"/>
+                                <rect key="frame" x="960.5" y="75" width="42.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyW-HI-wCd">
-                                <rect key="frame" x="26" y="106" width="277" height="20.5"/>
+                                <rect key="frame" x="30" y="106" width="973" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAt-Z4-glP">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="1322" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="compose" id="6sT-jz-fnl">
@@ -405,7 +405,7 @@
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Dc-nK-eat">
-                                <rect key="frame" x="26" y="146.5" width="277" height="44"/>
+                                <rect key="frame" x="30" y="146.5" width="973" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="nR9-Bm-JS2"/>
                                     <barButtonItem title="リツイート" id="B07-Yy-Osk">
@@ -432,7 +432,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBx-9T-jdL">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="7vb-oP-GFt"/>
                                 </items>
@@ -484,11 +484,11 @@
                         <viewControllerLayoutGuide type="bottom" id="48h-iR-S05"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXA-pM-GH0">
-                                <rect key="frame" x="46" y="124" width="228" height="185"/>
+                                <rect key="frame" x="50" y="124" width="924" height="185"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="185" id="jGV-lR-4fU"/>
                                 </constraints>
@@ -527,7 +527,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="brA-qg-MhP"/>
+        <segue reference="b5m-Lu-ZuM"/>
         <segue reference="HSJ-36-sTs"/>
         <segue reference="pYv-K7-Sxb"/>
     </inferredMetricsTieBreakers>

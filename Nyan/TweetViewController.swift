@@ -24,6 +24,10 @@ class TweetViewController : UIViewController {
     let config:Config = Config.sharedInstance
     var tweet: [String: Any]?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     func setLabel(text:String) {
         
         DispatchQueue.main.async() {

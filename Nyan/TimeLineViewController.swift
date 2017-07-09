@@ -21,6 +21,10 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
     let semaphore = DispatchSemaphore(value: 1)
 
     @IBOutlet weak var tableView: UITableView!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     // 時間がかかる処理なのでサブスレッド(global queue)で呼ばれるべき
     func updateTimeline()

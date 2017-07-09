@@ -25,6 +25,10 @@ class ReplyViewController: UIViewController  {
         titleBar.title = (user?["name"] as? String)! + "への返信"
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let tweetViewController = segue.destination as? TweetViewController {
