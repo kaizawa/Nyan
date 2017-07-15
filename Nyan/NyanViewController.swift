@@ -43,7 +43,7 @@ class NyanViewController: UIViewController {
         
         OperationQueue().addOperation({
             // exit 1 sec later
-            sleep(1)
+            sleep(2)
 
             if(self.config.autoExit) {
                 // exit automatically

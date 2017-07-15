@@ -13,6 +13,7 @@
 		8A2F67F91E7E1B38007C27EF /* NyanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F67F81E7E1B38007C27EF /* NyanViewController.swift */; };
 		8A2F67FB1E7E2F47007C27EF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2F67FA1E7E2F47007C27EF /* Accounts.framework */; };
 		8A2F67FD1E7E7C90007C27EF /* NyanUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */; };
+		8A563EE81F19B6D8009BB8FD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A563EE71F19B6D8009BB8FD /* Launch Screen.storyboard */; };
 		8A6FA0501EB5853700653C22 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6FA04F1EB5853700653C22 /* AccountManager.swift */; };
 		8A7B69371EFF7DA700A5D209 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B69361EFF7DA700A5D209 /* TimeLineViewController.swift */; };
 		8A7B69391F0D2C5100A5D209 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B69381F0D2C5100A5D209 /* TweetCell.swift */; };
@@ -31,6 +32,7 @@
 		8A2F67F81E7E1B38007C27EF /* NyanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NyanViewController.swift; sourceTree = "<group>"; };
 		8A2F67FA1E7E2F47007C27EF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8A2F67FC1E7E7C90007C27EF /* NyanUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NyanUIView.swift; sourceTree = "<group>"; };
+		8A563EE71F19B6D8009BB8FD /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8A6FA04F1EB5853700653C22 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		8A7B69361EFF7DA700A5D209 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		8A7B69381F0D2C5100A5D209 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				8A7B693A1F11EDB600A5D209 /* TweetViewController.swift */,
 				8AFF168B1E7E0E41001FE04E /* Assets.xcassets */,
 				8AFF16881E7E0E41001FE04E /* Main.storyboard */,
+				8A563EE71F19B6D8009BB8FD /* Launch Screen.storyboard */,
 			);
 			path = Nyan;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A563EE81F19B6D8009BB8FD /* Launch Screen.storyboard in Resources */,
 				8AFF168C1E7E0E41001FE04E /* Assets.xcassets in Resources */,
 				8AFF168A1E7E0E41001FE04E /* Main.storyboard in Resources */,
 			);

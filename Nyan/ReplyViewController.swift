@@ -58,9 +58,7 @@ class ReplyViewController: UIViewController  {
                                 url: updateUrl as URL!, parameters: params)
         
         request?.account = accountManager.getAccount(name: config.account!)
-        
-        self.setLabel(text: msg)
-        
+                
         let handler: SLRequestHandler  = { (data: Data?, response: HTTPURLResponse?, error: Error?) -> Void in
             
             if error != nil {
@@ -76,6 +74,7 @@ class ReplyViewController: UIViewController  {
                 }
             }
             self.setLabel(text: "送信したにゃん")
+            sleep(1)
 
             let storyboard: UIStoryboard = self.storyboard!
 
