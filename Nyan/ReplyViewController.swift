@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Social
 
-class ReplyViewController: UIViewController  {
+class ReplyViewController: UIViewController, UITextFieldDelegate  {
     
     @IBOutlet weak var titleBar: UINavigationItem!
     @IBOutlet weak var message: UITextField!
@@ -23,6 +23,7 @@ class ReplyViewController: UIViewController  {
     override func viewDidLoad() {
         let user = tweet?["user"] as? [String:Any]
         titleBar.title = (user?["name"] as? String)! + "への返信"
+        message.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -45,7 +46,7 @@ class ReplyViewController: UIViewController  {
     }
     
     @IBAction func sendReply(_ sender: Any) {
-        
+
         let user = tweet?["user"] as? [String:Any]
         let screenName = user?["screen_name"] as? String
         
@@ -88,5 +89,14 @@ class ReplyViewController: UIViewController  {
             }
         }
         request?.perform(handler: handler)
-    }    
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        
+        if (textField == message) {
+            message.resignFirstResponder()
+        }
+        return true
+    }
+
 }

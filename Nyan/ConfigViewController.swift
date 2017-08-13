@@ -9,7 +9,7 @@
 import UIKit
 import Accounts
 
-class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource  {
+class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate  {
     
     @IBOutlet weak var message: UITextField!
     @IBOutlet weak var tweetOnBoot: UISwitch!
@@ -19,17 +19,22 @@ class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     let config = Config.sharedInstance
     let accountManager = AccountManager.sharedInstance
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        
+        message.delegate = self;
+        account.delegate = self;
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
         return .lightContent
     }
 
-    override func viewWillAppear(_ animated:Bool) {                
+    override func viewWillAppear(_ animated:Bool)
+    {
         super.viewWillAppear(animated)
-        
         accountManager.requestAccounts()
 
         autoExit.isOn = config.autoExit
@@ -68,24 +73,25 @@ class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         picker.selectRow(accountRow, inComponent: 0, animated: false)
 
         let doneButton = UIBarButtonItem(
-            title: "設定", style: .plain, target: self, action: #selector(ConfigViewController.donePicker))
+            title: "選択", style: .plain, target: self, action: #selector(ConfigViewController.donePicker(sender:)))
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.blackTranslucent
         toolBar.tintColor = UIColor.white
         toolBar.backgroundColor = UIColor.black
         toolBar.setItems([doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-        
+                
         account.inputView = picker
-        //toolbar doesn't work
-        //account.inputAccessoryView = toolBar
-    }
+        account.inputAccessoryView = toolBar
+     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)
+    {
         super.viewDidAppear(animated)
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
     }
 
@@ -101,11 +107,11 @@ class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         self.config.setMessage(newVal: sender.text!)
     }
     
-    @IBAction func tweetButtonAction(_ sender: UIButton) {
+    @IBAction func tweetButtonAction(_ sender: Any) {
         
         config.setAccount(newVal: self.account.text!)
         config.setMessage(newVal: self.message.text!)
-
+        
         let storyboard: UIStoryboard = self.storyboard!
         let nextView = storyboard.instantiateViewController(withIdentifier: "nyan") as! NyanViewController
         self.present(nextView, animated: false, completion: nil)
@@ -136,8 +142,19 @@ class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         self.account.endEditing(true)
     }
     
-    func donePicker () {
+    func donePicker (sender: UIButton) {
+        print("done picker called")
+        account.resignFirstResponder()
 
-        self.account.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+
+        if (textField == message) {
+            message.resignFirstResponder()
+        } else if(textField == account) {
+            account.resignFirstResponder()
+        }
+        return true
     }
 }

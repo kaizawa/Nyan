@@ -23,6 +23,7 @@ class TweetViewController : UIViewController {
     let accountManager = AccountManager.sharedInstance
     let config:Config = Config.sharedInstance
     var tweet: [String: Any]?
+    var retweeted = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -60,6 +61,12 @@ class TweetViewController : UIViewController {
     
     @IBAction func retweet(_ sender: Any) {
         
+        if(retweeted)
+        {
+            self.handleError(msg: "もうリツイートしたにゃん\n")
+            return
+        }
+        
         let id = tweet?["id_str"] as? String
 
         let updateUrl = NSURL(string: "https://api.twitter.com/1.1/statuses/retweet/" + id! + ".json")
@@ -79,15 +86,22 @@ class TweetViewController : UIViewController {
             }
             
             if let response = response {
-                if(response.statusCode != 200) {
+                if(response.statusCode != 200)
+                {
+                    if(response.statusCode == 403)
+                    {
+                        self.handleError(msg: "もうリツイートしたにゃん\n")
+                        self.retweeted = true
+                        return
+                    }
                     
                     self.handleError(msg: "エラーだにゃん\n\nHTTP\(response.statusCode)")
                     return
                 }
             }
             
+            self.retweeted = true
             self.handleError(msg: "リツートしたにゃん")
-
         }
         request?.perform(handler: handler)
     }

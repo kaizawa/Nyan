@@ -14,7 +14,8 @@ class NyanViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet var uiView: UIView!
-    @IBOutlet weak var configButton: UIButton!
+    @IBOutlet weak var autoExitSwitch: UISwitch!
+    @IBOutlet weak var autoExitLabel: UILabel!
     
     var accountStore:ACAccountStore = ACAccountStore()
     let semaphore = DispatchSemaphore(value: 1)
@@ -34,15 +35,32 @@ class NyanViewController: UIViewController {
         super.viewDidLoad()
         
         sendNyan()
+        showAutoExitSwitch()
+    }
+    
+    @IBAction func autoExitSwichAction(_ sender: UISwitch) {
+
+        // disable auto exit
+        self.config.setAutoExit(newVal: sender.isOn)
+
+        OperationQueue().addOperation({
+            self.goToConfigView()
+        })
+    }
+    
+    func showAutoExitSwitch()
+    {
+        autoExitSwitch.setOn(config.autoExit, animated: true)
+        autoExitSwitch.isHidden = !config.autoExit
+        autoExitLabel.isHidden = !config.autoExit
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        configButton.isEnabled = config.autoExit
         
         OperationQueue().addOperation({
-            // exit 1 sec later
+            // exit 2 sec later
             sleep(2)
 
             if(self.config.autoExit) {
@@ -50,20 +68,28 @@ class NyanViewController: UIViewController {
                 exit(1)
             } else {
                 // back to config view
-                let storyboard: UIStoryboard = self.storyboard!
-                let configView = storyboard.instantiateViewController(withIdentifier: "config") as! ConfigViewController
-                self.present(configView, animated: true, completion: nil)
+                self.goToConfigView()
             }
 
         })
     }
+    
+    func goToConfigView () -> Void
+    {
+        let storyboard: UIStoryboard = self.storyboard!
+        let configView = storyboard.instantiateViewController(withIdentifier: "config") as! ConfigViewController
+        DispatchQueue.main.async() {
+            self.present(configView, animated: false, completion: nil)
+        }
+    }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
     }
     
-    func setLabel(text:String) {
-        
+    func setLabel(text:String)
+    {
         DispatchQueue.main.async() {
             self.label.text = text
         }
@@ -77,7 +103,7 @@ class NyanViewController: UIViewController {
     func sendNyan () -> Void {
         
 
-        let  id:UInt32! = arc4random();
+        let id:UInt32! = arc4random();
         let updateUrl = NSURL(string: "https://api.twitter.com/1.1/statuses/update.json")
         let msg:String = self.config.message
         let params = ["status" : msg, "in_reply_to_status_id" : String(id)]
@@ -128,9 +154,4 @@ class NyanViewController: UIViewController {
         self.semaphore.signal()
     }
     
-    @IBAction func ConfigButtonAction(_ sender: UIButton) {
-
-        // disable auto exit
-        self.config.autoExit = false
-    }
 }
