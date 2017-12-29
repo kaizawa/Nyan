@@ -9,6 +9,7 @@ import UIKit
 import Social
 import Accounts
 import Foundation
+import TwitterKit
 
 class NyanViewController: UIViewController {
     
@@ -21,27 +22,30 @@ class NyanViewController: UIViewController {
     let semaphore = DispatchSemaphore(value: 1)
     let useDefaults = UserDefaults.standard
     let config:Config = Config.sharedInstance
-    let accountManager = AccountManager.sharedInstance
+    var mediaId:String = ""
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
         return .lightContent
     }
 
-    override func viewWillAppear(_ animated:Bool) {
+    override func viewWillAppear(_ animated:Bool)
+    {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         sendNyan()
         showAutoExitSwitch()
     }
     
-    @IBAction func autoExitSwichAction(_ sender: UISwitch) {
-
+    @IBAction func autoExitSwichAction(_ sender: UISwitch)
+    {
         // disable auto exit
-        self.config.setAutoExit(newVal: sender.isOn)
+        self.config.setAutoExit(sender.isOn)
 
         OperationQueue().addOperation({
             self.goToConfigView()
@@ -55,11 +59,12 @@ class NyanViewController: UIViewController {
         autoExitLabel.isHidden = !config.autoExit
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)
+    {
         super.viewDidAppear(animated)
         
-        
-        OperationQueue().addOperation({
+        DispatchQueue.global().async()
+        {
             // exit 2 sec later
             sleep(2)
 
@@ -70,15 +75,17 @@ class NyanViewController: UIViewController {
                 // back to config view
                 self.goToConfigView()
             }
-
-        })
+        }
     }
     
     func goToConfigView () -> Void
     {
         let storyboard: UIStoryboard = self.storyboard!
-        let configView = storyboard.instantiateViewController(withIdentifier: "config") as! ConfigViewController
-        DispatchQueue.main.async() {
+        let configView = storyboard.instantiateViewController(
+            withIdentifier: "config") as! ConfigViewController
+
+        DispatchQueue.main.async()
+        {
             self.present(configView, animated: false, completion: nil)
         }
     }
@@ -91,7 +98,10 @@ class NyanViewController: UIViewController {
     func setLabel(text:String)
     {
         DispatchQueue.main.async() {
-            self.label.text = text
+            
+            if let label = self.label {
+                label.text = text
+            }
         }
     }
     
@@ -100,36 +110,9 @@ class NyanViewController: UIViewController {
         self.setLabel(text: msg)
     }
     
-    func sendNyan () -> Void {
-        
-
-        let id:UInt32! = arc4random();
-        let updateUrl = NSURL(string: "https://api.twitter.com/1.1/statuses/update.json")
-        let msg:String = self.config.message
-        let params = ["status" : msg, "in_reply_to_status_id" : String(id)]
-        
-        let request = SLRequest(forServiceType: SLServiceTypeTwitter,
-                                requestMethod: SLRequestMethod.POST,
-                                url: updateUrl as URL!, parameters: params)
-        
-        if(config.account == nil) {
-            
-            if(accountManager.accounts.isEmpty) {
-
-                self.handleError(msg: "アカウント\nないにゃん")
-                self.semaphore.signal()
-                return
-            } else {
-                // select first account for now
-                request?.account = accountManager.accounts.first
-            }
-        } else {
-            request?.account = accountManager.getAccount(name: config.account!)
-        }
-
-        self.setLabel(text: msg)
-        
-        let handler: SLRequestHandler  = { (data: Data?, response: HTTPURLResponse?, error: Error?) -> Void in
+    func sendNyan () -> Void
+    {
+        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
             
             if error != nil {
                 self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
@@ -137,7 +120,7 @@ class NyanViewController: UIViewController {
                 return
             }
             
-            if let response = response {
+            if let response = response as? HTTPURLResponse  {
                 if(response.statusCode != 200) {
                     
                     self.handleError(msg: "エラーだにゃん\n\nHTTP\(response.statusCode)")
@@ -147,11 +130,16 @@ class NyanViewController: UIViewController {
             }
             self.semaphore.signal()
         }
-        self.semaphore.wait()
-        request?.perform(handler: handler)
-        // wait for request process
-        self.semaphore.wait()
-        self.semaphore.signal()
+
+        let errorHandler: ErrorHandler = {
+            
+            (message:String?) -> Void in
+                self.setLabel(text: message!)
+        }
+        
+        TwitterWrapper.getInstance().sendStatus(
+            handler: requestHandler,
+            errorHandler: errorHandler,
+            semaphore: self.semaphore)
     }
-    
 }

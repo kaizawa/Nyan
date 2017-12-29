@@ -8,82 +8,171 @@
 
 import UIKit
 import Accounts
+import TwitterKit
 
-class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate  {
-    
-    @IBOutlet weak var message: UITextField!
+class ConfigViewController: UIViewController, UITextFieldDelegate  {
+        
+    @IBOutlet weak var status: UITextField!
     @IBOutlet weak var tweetOnBoot: UISwitch!
     @IBOutlet weak var autoExit: UISwitch!
     @IBOutlet weak var account: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var deleteImageButton: UIButton!
+    @IBOutlet weak var scheduleSwitch: UISwitch!
+    @IBOutlet weak var scheduleDateLabel: UILabel!
     
+    @IBAction func accountAction(_ sender: UITextField) {
+        
+        Twitter.sharedInstance().logIn(completion: { (session, error) in
+            
+            if let session = session {
+                TwitterWrapper.getInstance().setSession(session:session)
+                self.account.text = session.userName
+            }
+        })
+    }
+    
+    @IBAction func timeLineButtonAction(_ sender: UIBarButtonItem)
+    {
+        config.setAccount(self.account.text!)
+        config.setStatus(self.status.text!)
+        let nextView = self.storyboard!.instantiateViewController(withIdentifier: "timeline") as! TimeLineViewController
+        
+        DispatchQueue.main.async() {
+            
+            self.present(nextView, animated: false, completion: nil)
+        }
+    }
+    
+    @IBAction func cameraButtonAction(_ sender: UIBarButtonItem)
+    {
+        config.setAccount(self.account.text!)
+        config.setStatus(self.status.text!)
+        let nextView = self.storyboard!.instantiateViewController(withIdentifier: "camera") as! CameraViewController
+        
+        DispatchQueue.main.async() {
+            
+            self.present(nextView, animated: false, completion: nil)
+        }
+    }
+    
+    @IBAction func scheduleSwitchAction(_ sender: UISwitch)
+    {
+        config.setAccount(self.account.text!)
+        config.setStatus(self.status.text!)
+        
+        if(sender.isOn)
+        {
+            let nextView = self.storyboard!.instantiateViewController(withIdentifier: "schedule") as! ScheduleViewController
+            
+            DispatchQueue.main.async() {
+                
+                self.present(nextView, animated: false, completion: nil)
+            }
+        } else {
+
+            // cancel existing task
+            if let workItem = ScheduleViewController.workItem
+            {
+                workItem.cancel()
+                ScheduleViewController.workItem = nil
+            }
+            config.setScheduledDate(nil)
+            DispatchQueue.main.async() {
+                self.scheduleDateLabel.isHidden = true
+                self.autoExit.isEnabled = true
+            }
+        }
+    }
+
     let config = Config.sharedInstance
-    let accountManager = AccountManager.sharedInstance
+    var image:UIImage? = nil
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        message.delegate = self;
-        account.delegate = self;
+        status.delegate = self;
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
         return .lightContent
     }
-
+    
     override func viewWillAppear(_ animated:Bool)
     {
         super.viewWillAppear(animated)
-        accountManager.requestAccounts()
-
+        
+        // register notification so that viewWillAppear will be called when entring foreground
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(self.viewWillAppear),
+            name: Notification.Name(rawValue:"willEnterForeground"), object: nil)
+        
         autoExit.isOn = config.autoExit
         tweetOnBoot.isOn = config.tweetOnBoot
-        message.text = config.message
+        status.text = config.status
         
-        var accountRow = 0
-    
-        if(config.account == nil || accountManager.getAccount(name: config.account!) == nil){
- 
-            // account is not saved or account is no longer exist
-            if(accountManager.accounts.isEmpty) {
-                account.text = "アカウントがありません"
-            } else {
-                // set 1st account for now
-                account.text = accountManager.accounts.first?.username
-                accountRow = 0
-                config.setAccount(newVal: account.text!)
+        if let session = TwitterWrapper.getInstance().getSession() {
+
+            account.text = session.userName
+        }
+        else {            
+           account.text = "アカウントがありません"
+        }
+        
+        if let scheduledDate = config.scheduledDate {
+            
+            // Schedule Tweet is configured
+            DispatchQueue.main.async() {
+                                
+                self.scheduleSwitch.isOn = true
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.setLocalizedDateFormatFromTemplate("M/d HH:mm")
+                self.scheduleDateLabel.text = dateFormatter.string(from: scheduledDate) + " に自動ツイート"
+                self.scheduleDateLabel.isHidden = false
+
+                // auto exit is disabled because schedule tweet
+                self.autoExit.isOn = false
+                self.config.setAutoExit(false)
+                self.autoExit.isEnabled = false
             }
         } else {
-            for index in 0..<accountManager.accounts.count {
-
-                if(accountManager.accounts[index].username == config.account) {
-                    accountRow = index
-                    account.text = config.account
-                    break
-                }
+        
+            DispatchQueue.main.async() {
+                
+                self.scheduleSwitch.isOn = false
+                self.scheduleDateLabel.isHidden = true
+                self.autoExit.isEnabled = true
             }
         }
         
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        picker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100)
-        picker.showsSelectionIndicator = true
-        picker.selectRow(accountRow, inComponent: 0, animated: false)
-
-        let doneButton = UIBarButtonItem(
-            title: "選択", style: .plain, target: self, action: #selector(ConfigViewController.donePicker(sender:)))
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.blackTranslucent
-        toolBar.tintColor = UIColor.white
-        toolBar.backgroundColor = UIColor.black
-        toolBar.setItems([doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-                
-        account.inputView = picker
-        account.inputAccessoryView = toolBar
+        if(image != nil){
+            imageView.image = image
+            deleteImageButton.isHidden = false
+        } else {
+            if(config.image != nil) {
+                image = config.image
+                imageView.image = image
+                deleteImageButton.isHidden = false
+            } else {
+                deleteImageButton.isHidden = true
+            }
+        }
      }
+    
+    @IBAction func deleteImageButtonAction(_ sender: UIButton)
+    {
+        
+        DispatchQueue.main.async() {
+            self.image = nil
+            self.imageView.image = nil
+            self.config.setImage(nil)
+            self.config.setMediaId(nil)
+            self.deleteImageButton.isHidden = true
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool)
     {
@@ -96,50 +185,30 @@ class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
 
     @IBAction func tweetOnBootSwitchAction(_ sender: UISwitch) {
-        self.config.setTweetOnBoot(newVal: sender.isOn)
+        self.config.setTweetOnBoot(sender.isOn)
     }
 
     @IBAction func autoExitSwitchAction(_ sender: UISwitch) {
-        self.config.setAutoExit(newVal: sender.isOn)
+        self.config.setAutoExit(sender.isOn)
     }
     
-    @IBAction func messageTextAction(_ sender: UITextField) {
-        self.config.setMessage(newVal: sender.text!)
+    @IBAction func statusTextAction(_ sender: UITextField) {
+        self.config.setStatus(sender.text!)
     }
     
     @IBAction func tweetButtonAction(_ sender: Any) {
         
-        config.setAccount(newVal: self.account.text!)
-        config.setMessage(newVal: self.message.text!)
+        config.setAccount(self.account.text!)
+        config.setStatus(self.status.text!)
         
         let storyboard: UIStoryboard = self.storyboard!
         let nextView = storyboard.instantiateViewController(withIdentifier: "nyan") as! NyanViewController
         self.present(nextView, animated: false, completion: nil)
+
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView,
-        numberOfRowsInComponent component: Int) -> Int {
-        
-        accountManager.requestAccounts()
-        return accountManager.accounts.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int,
-                    forComponent component: Int) -> String? {
-
-        return accountManager.accounts[row].username
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int,
-                    inComponent component: Int) {
-        
-        config.setAccount(newVal: accountManager.accounts[row].username)
-        account.text = accountManager.accounts[row].username
-        self.account.endEditing(true)
     }
     
     func donePicker (sender: UIButton) {
@@ -150,9 +219,12 @@ class ConfigViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
 
-        if (textField == message) {
-            message.resignFirstResponder()
-        } else if(textField == account) {
+        if (textField == status) {
+
+            status.resignFirstResponder()
+        }
+        else if(textField == account) {
+            
             account.resignFirstResponder()
         }
         return true

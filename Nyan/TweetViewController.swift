@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Social
 import Accounts
+import TwitterKit
 
 class TweetViewController : UIViewController {
     
@@ -20,10 +21,10 @@ class TweetViewController : UIViewController {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var titleText: UINavigationItem!
     
-    let accountManager = AccountManager.sharedInstance
     let config:Config = Config.sharedInstance
     var tweet: [String: Any]?
     var retweeted = false
+    let semaphore = DispatchSemaphore(value: 1)
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -67,43 +68,47 @@ class TweetViewController : UIViewController {
             return
         }
         
-        let id = tweet?["id_str"] as? String
-
-        let updateUrl = NSURL(string: "https://api.twitter.com/1.1/statuses/retweet/" + id! + ".json")
-        let params: [String: String] = [:]
-        
-        let request = SLRequest(forServiceType: SLServiceTypeTwitter,
-                                requestMethod: SLRequestMethod.POST,
-                                url: updateUrl as URL!, parameters: params)
-        
-        request?.account = accountManager.getAccount(name: config.account!)
-
-        let handler: SLRequestHandler  = { (data: Data?, response: HTTPURLResponse?, error: Error?) -> Void in
+        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
             
             if error != nil {
                 self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
+                self.semaphore.signal()
                 return
             }
             
-            if let response = response {
+            if let response = response as? HTTPURLResponse {
                 if(response.statusCode != 200)
                 {
                     if(response.statusCode == 403)
                     {
                         self.handleError(msg: "もうリツイートしたにゃん\n")
                         self.retweeted = true
+                        self.semaphore.signal()
                         return
                     }
                     
                     self.handleError(msg: "エラーだにゃん\n\nHTTP\(response.statusCode)")
+                    self.semaphore.signal()
                     return
                 }
             }
             
             self.retweeted = true
             self.handleError(msg: "リツートしたにゃん")
+            self.semaphore.signal()
         }
-        request?.perform(handler: handler)
+        
+        let errorHandler: ErrorHandler = {
+            
+            (message:String?) -> Void in
+            self.setLabel(text: message!)
+        }
+        
+        TwitterWrapper.getInstance().retweet(
+            tweet: tweet,
+            handler: requestHandler,
+            errorHandler: errorHandler,
+            semaphore: self.semaphore)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,34 +121,37 @@ class TweetViewController : UIViewController {
     
     @IBAction func sendLike(_ sender: Any) {
         
-        let id = tweet?["id_str"] as! String
-        
-        let updateUrl = NSURL(string: "https://api.twitter.com/1.1/favorites/create.json")
-        let params = ["id" : id ]
-        
-        let request = SLRequest(forServiceType: SLServiceTypeTwitter,
-                                requestMethod: SLRequestMethod.POST,
-                                url: updateUrl as URL!, parameters: params)
-        
-        request?.account = accountManager.getAccount(name: config.account!)
-        
-        let handler: SLRequestHandler  = { (data: Data?, response: HTTPURLResponse?, error: Error?) -> Void in
+        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
             
             if error != nil {
                 self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
+                self.semaphore.signal()
                 return
             }
             
-            if let response = response {
+            if let response = response as? HTTPURLResponse {
                 if(response.statusCode != 200) {
                     
                     self.handleError(msg: "エラーだにゃん\n\nHTTP\(response.statusCode)")
+                    self.semaphore.signal()
                     return
                 }
             }
             
-            self.handleError(msg: "いいね！したにゃん")            
+            self.handleError(msg: "いいね！したにゃん")
+            self.semaphore.signal()
         }
-        request?.perform(handler: handler)
+
+        let errorHandler: ErrorHandler = {
+            
+            (message:String?) -> Void in
+            self.setLabel(text: message!)
+        }
+        
+        TwitterWrapper.getInstance().sendLike(
+            tweet: tweet,
+            handler: requestHandler,
+            errorHandler: errorHandler,
+            semaphore: self.semaphore)
     }
 }

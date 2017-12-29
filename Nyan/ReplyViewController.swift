@@ -9,14 +9,15 @@
 import Foundation
 import UIKit
 import Social
+import TwitterKit
 
 class ReplyViewController: UIViewController, UITextFieldDelegate  {
     
     @IBOutlet weak var titleBar: UINavigationItem!
     @IBOutlet weak var message: UITextField!
     @IBOutlet weak var label: UILabel!
-    let accountManager = AccountManager.sharedInstance
     let config:Config = Config.sharedInstance
+    let semaphore = DispatchSemaphore(value: 1)
 
     var tweet: [String: Any]?
     
@@ -46,31 +47,20 @@ class ReplyViewController: UIViewController, UITextFieldDelegate  {
     }
     
     @IBAction func sendReply(_ sender: Any) {
-
-        let user = tweet?["user"] as? [String:Any]
-        let screenName = user?["screen_name"] as? String
-        
-        let updateUrl = NSURL(string: "https://api.twitter.com/1.1/statuses/update.json")
-        let msg:String = "@" +  screenName! + " " + self.message.text!
-        let params = ["status" : msg, "in_reply_to_status_id" : tweet?["id_str"] as! String]
-        
-        let request = SLRequest(forServiceType: SLServiceTypeTwitter,
-                                requestMethod: SLRequestMethod.POST,
-                                url: updateUrl as URL!, parameters: params)
-        
-        request?.account = accountManager.getAccount(name: config.account!)
-                
-        let handler: SLRequestHandler  = { (data: Data?, response: HTTPURLResponse?, error: Error?) -> Void in
             
+        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
+
             if error != nil {
                 self.setLabel(text: "エラーだにゃん\n\(String(describing: error))")
+                self.semaphore.signal()
                 return
             }
             
-            if let response = response {
-                if(response.statusCode != 200) {
+            if let httpResponse = response as? HTTPURLResponse{
+                if(httpResponse.statusCode != 200) {
                     
-                    self.setLabel(text: "エラーだにゃん\n\nHTTP\(response.statusCode)")
+                    self.setLabel(text: "エラーだにゃん\n\nHTTP\(httpResponse.statusCode)")
+                    self.semaphore.signal()
                     return
                 }
             }
@@ -87,8 +77,21 @@ class ReplyViewController: UIViewController, UITextFieldDelegate  {
 
                 self.present(tweetViewController, animated: false, completion: nil)
             }
+            self.semaphore.signal()
         }
-        request?.perform(handler: handler)
+        
+        let errorHandler: ErrorHandler = {
+            
+            (message:String?) -> Void in
+            self.setLabel(text: message!)
+        }
+        
+        TwitterWrapper.getInstance().sendReply(
+            tweet: tweet,
+            status: self.message.text!,
+            handler: requestHandler,
+            errorHandler: errorHandler,
+            semaphore: self.semaphore)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{

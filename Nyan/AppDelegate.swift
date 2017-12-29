@@ -7,21 +7,34 @@
 //
 
 import UIKit
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var backgroundTaskIdentifier : UIBackgroundTaskIdentifier = 0
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Twitter.sharedInstance().start(withConsumerKey:"JVnDZmANHjkzU1Tx4awnXw6B0", consumerSecret:"bKYMHvYMXEDmCP1fYFmm3cY4Pegpm0QFsgEGY2dD4cZjCcmjUB")
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return Twitter.sharedInstance().application(app, open: url, options: options)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
+        self.backgroundTaskIdentifier = application.beginBackgroundTask(){
+            [weak self] in
+            application.endBackgroundTask((self?.backgroundTaskIdentifier)!)
+            self?.backgroundTaskIdentifier = UIBackgroundTaskInvalid
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -33,11 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 
         //reload account
-        AccountManager.sharedInstance.requestAccounts()
+        //AccountManager.sharedInstance.requestAccounts()
+        
+        // create notification
+        NotificationCenter.default
+            .post(name: Notification.Name(rawValue:"willEnterForeground"), object: nil)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        application.endBackgroundTask(self.backgroundTaskIdentifier)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

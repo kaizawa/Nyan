@@ -14,7 +14,9 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var status: UILabel!
-
+    @IBOutlet weak var mediaImage: UIImageView!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    
     var userid: String?
     var tweet: [String:Any]?
     var retweeted = false
@@ -22,5 +24,6 @@ class TweetCell: UITableViewCell {
     override func prepareForReuse() {
         // アイコンをクリア
         icon.image = nil
+        mediaImage.image = nil
     }
 }
