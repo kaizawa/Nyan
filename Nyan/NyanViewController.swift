@@ -116,6 +116,7 @@ class NyanViewController: UIViewController {
             
             if error != nil {
                 self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
+                print(String(describing: error))
                 self.semaphore.signal()
                 return
             }

@@ -16,6 +16,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var mediaImage: UIImageView!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     
     var userid: String?
     var tweet: [String:Any]?

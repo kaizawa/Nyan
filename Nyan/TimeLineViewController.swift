@@ -19,6 +19,7 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
     var refreshControl:UIRefreshControl!
     var timeline: [AnyObject] = [AnyObject]()
     let semaphore = DispatchSemaphore(value: 1)
+    let MAX_IMAGE_HEIGHT:CGFloat = 300
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -79,7 +80,7 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
         self.refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
         
-        self.tableView.estimatedRowHeight = 200.0
+        self.tableView.estimatedRowHeight = 400.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
         self.refreshControl.beginRefreshing()
@@ -162,6 +163,8 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
                 })
             }
         }
+        
+        // イメージの高さ設定をゼロ(空白行をさけるため)
         cell.imageHeightConstraint.constant = 0
         
         // ツイート内の画像(Twitterに送信された画像)
@@ -178,28 +181,18 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
                         let mediaUrl = URL(string: mediaUrlString as! String);
                         if let mediaUrl = mediaUrl
                         {
-                            let rect = CGRect(x: 0, y: 0, width: 200, height: 200)
-                            cell.mediaImage.frame = rect
-                            cell.mediaImage.isHidden = false
-                            cell.imageHeightConstraint.constant = 97
-
-                            loadImage(request: URLRequest(url: mediaUrl), session: URLSession.shared,
-                                      cell: cell, urlString: mediaUrlString as! String,
-                                      function: { (image:UIImage, urlString:String) -> Void in
-                                        // メインスレッドで表示
-                                        DispatchQueue.main.async {
-                                            
-                                            let scale:CGFloat = 3.0
-                                            let oldFrame = cell.mediaImage.frame
-                                            let size = CGSize(width: image.size.width * scale, height:  image.size.height * scale)
-                                            UIGraphicsBeginImageContext(size)
-                                            let rect = CGRect(x: oldFrame.maxX, y:oldFrame.maxY, width: size.width, height: size.height)
-                                            image.draw(in: rect)
-                                            let newImage = UIGraphicsGetImageFromCurrentImageContext()
-                                            UIGraphicsEndImageContext()
-                                            cell.mediaImage.frame = rect
-                                            cell.mediaImage.image = newImage
-                                        }
+                            // イメージの高さ制約を設定
+                            cell.imageHeightConstraint.constant = MAX_IMAGE_HEIGHT
+                            cell.imageWidthConstraint.constant = cell.frame.width
+                            
+                            loadImage(
+                                request: URLRequest(url: mediaUrl), session: URLSession.shared,
+                                cell: cell, urlString: mediaUrlString as! String,
+                                function: { (image:UIImage, urlString:String) -> Void in
+                                    // メインスレッドで表示
+                                    DispatchQueue.main.async {
+                                        cell.mediaImage.image = image
+                                    }
                             })
                         }
                     }
@@ -251,6 +244,7 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
 
             if let tweetViewController = segue.destination as? TweetViewController {
                 tweetViewController.tweet = cell.tweet
+                tweetViewController.image = cell.mediaImage.image
             }
         }
     }

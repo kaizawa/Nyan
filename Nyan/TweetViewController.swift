@@ -17,14 +17,18 @@ class TweetViewController : UIViewController {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var screenName: UILabel!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var status: UILabel!
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var titleText: UINavigationItem!
+
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     let config:Config = Config.sharedInstance
     var tweet: [String: Any]?
     var retweeted = false
     let semaphore = DispatchSemaphore(value: 1)
+    var image: UIImage?
+    var url: URL?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -33,7 +37,7 @@ class TweetViewController : UIViewController {
     func setLabel(text:String) {
         
         DispatchQueue.main.async() {
-            self.label.text = text
+            self.message.text = text
         }
     }
     
@@ -48,8 +52,9 @@ class TweetViewController : UIViewController {
 
         self.name?.text = user?["name"] as? String
         self.screenName?.text = user?["screen_name"] as? String
-        self.status?.text = tweet?["text"] as? String
-        self.titleText?.title = (user?["name"] as? String)! + "のツイート"
+        self.textView?.text = tweet?["text"] as? String
+        self.textView?.dataDetectorTypes = .link
+        //self.titleText?.title = (user?["name"] as? String)! + "のツイート"
         
         // アイコンのURLをとってきてプロトコルをHTTPに変更
         let urlString = user?["profile_image_url_https"] as! String
@@ -57,6 +62,27 @@ class TweetViewController : UIViewController {
         if let cacheImage = config.iconCache.object(forKey: urlString as AnyObject) {
             // キャッシュ画像の設定
             icon.image = cacheImage
+        }
+        
+        if let image = image {
+            imageView.image = image
+        } else {
+            imageHeightConstraint.constant = 0
+        }
+        
+        // ツイート内の画像(Twitterに送信された画像)
+        if let entities = tweet?["entities"] as? [String:Any]
+        {
+            if let urls = entities["urls"] as? [AnyObject]
+            {
+                for urlsEntity in urls
+                {
+                    if let urlString = urlsEntity["expanded_url"]
+                    {
+                        url = URL(string: urlString as! String)
+                    }
+                }
+            }
         }
     }
     

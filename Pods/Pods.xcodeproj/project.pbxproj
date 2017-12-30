@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80D7FA1496C32C07A6255F5D63240089 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		BAE42BF829443D3937C9DA193DCD1F2F /* Pods-Nyan-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D28B4D2E67A024296FF1B32643D49BA /* Pods-Nyan-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9EC2BB3639CEE1B6336A9D95DFB1E4C /* Pods-Nyan-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 756445D4D13F9ED35260E9480B597690 /* Pods-Nyan-dummy.m */; };
 /* End PBXBuildFile section */
@@ -18,7 +17,6 @@
 		402DF75D3E8366F94F3BFCB8094DBE1F /* Pods-Nyan-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nyan-frameworks.sh"; sourceTree = "<group>"; };
 		607632321347DD389EE407CB49D30572 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = iOS/TwitterKit.framework; sourceTree = "<group>"; };
 		62AAE371B4981DD88E16425088D50D97 /* Pods-Nyan-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Nyan-resources.sh"; sourceTree = "<group>"; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		756445D4D13F9ED35260E9480B597690 /* Pods-Nyan-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Nyan-dummy.m"; sourceTree = "<group>"; };
 		8230F0BEA1EE6C17F204819158B3F4DC /* Pods-Nyan-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Nyan-acknowledgements.plist"; sourceTree = "<group>"; };
 		8621F113D343918B10EBA21E07D3BBFD /* TwitterKitResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = iOS/TwitterKit.framework/TwitterKitResources.bundle; sourceTree = "<group>"; };
@@ -37,7 +35,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80D7FA1496C32C07A6255F5D63240089 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +140,6 @@
 		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";

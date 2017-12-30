@@ -39,28 +39,6 @@ class TwitterWrapper {
         return self.session;
     }
     
-    private func updateSession ()
-    {        
-        if session == nil {
-            
-            if Twitter.sharedInstance().sessionStore.hasLoggedInUsers() {
-                
-                session = Twitter.sharedInstance().sessionStore.session() as? TWTRSession
-            }
-            else {
-                
-                Twitter.sharedInstance().logIn(completion: { (sess, error) in
-                    
-                    self.session = sess
-                    if(sess == nil){
-                        
-                        print("error: \(error?.localizedDescription ?? "")");
-                    }
-                })
-            }
-        }
-    }
-    
     static func getInstance() -> TwitterWrapper
     {
         return sharedInstance
@@ -68,7 +46,7 @@ class TwitterWrapper {
     
     private func request(requestMethod:String, urlStr:String, params:[String:String]?, handler:@escaping TWTRNetworkCompletion, errorHandler:ErrorHandler,  semaphore:DispatchSemaphore, imageData:Data?) -> Void {
     
-        if let session = self.session {
+        if let session = getSession() {
             let client = TWTRAPIClient(userID: session.userID)
             print("userid: \(session.userID)")
             var error : NSError?
