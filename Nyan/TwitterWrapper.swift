@@ -31,9 +31,9 @@ class TwitterWrapper {
     {
         if session == nil {
             
-            if Twitter.sharedInstance().sessionStore.hasLoggedInUsers() {
+            if TWTRTwitter.sharedInstance().sessionStore.hasLoggedInUsers() {
                 
-                session = Twitter.sharedInstance().sessionStore.session() as? TWTRSession
+                session = TWTRTwitter.sharedInstance().sessionStore.session() as? TWTRSession
             }
         }
         return self.session;
@@ -51,7 +51,7 @@ class TwitterWrapper {
             print("userid: \(session.userID)")
             var error : NSError?
             
-            let request = client.urlRequest(withMethod: requestMethod, url: urlStr, parameters: params, error: &error)
+            let request = client.urlRequest(withMethod: requestMethod, urlString: urlStr, parameters: params, error: &error)
             client.sendTwitterRequest(request, completion:handler);
             
             if let error = error {
@@ -90,7 +90,7 @@ class TwitterWrapper {
     func uploadMedia(handler:@escaping TWTRNetworkCompletion, errorHandler:ErrorHandler, semaphore:DispatchSemaphore)
     {
         
-        let imageData = UIImageJPEGRepresentation(config.image!, 1)
+        let imageData = config.image!.jpegData(compressionQuality: 1)
         
         guard let _ = imageData else {
             errorHandler("写真データないにゃん")

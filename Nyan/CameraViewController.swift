@@ -27,7 +27,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     override func viewDidLoad()
     {
         let videoDevice = AVCaptureDevice.default(for: AVMediaType.video)
-        videoDevice?.activeVideoMinFrameDuration = CMTimeMake(1, 30)
+        videoDevice?.activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: 30)
         videoDevice?.unlockForConfiguration()
         
         let cameraInput = try! AVCaptureDeviceInput.init(device: videoDevice!)
@@ -79,7 +79,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             space: colorSpace,
             bitmapInfo: bitmapInfo.rawValue)! as CGContext
         let imageRef = newContext.makeImage()!
-        let image = UIImage(cgImage: imageRef, scale: 1.0, orientation: UIImageOrientation.right)
+        let image = UIImage(cgImage: imageRef, scale: 1.0, orientation: UIImage.Orientation.right)
         // アンロック
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         

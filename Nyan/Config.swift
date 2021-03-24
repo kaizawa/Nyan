@@ -109,7 +109,7 @@ class Config {
         
         if let newVal = newVal {
             
-            let imageData = UIImageJPEGRepresentation(newVal, 1)
+            let imageData = newVal.jpegData(compressionQuality: 1)
             userDefaults.set(imageData, forKey: Config.IMAGE_NAME)
             userDefaults.synchronize()
         }

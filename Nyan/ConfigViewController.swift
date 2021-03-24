@@ -23,7 +23,7 @@ class ConfigViewController: UIViewController, UITextFieldDelegate  {
     
     @IBAction func accountAction(_ sender: UITextField) {
         
-        Twitter.sharedInstance().logIn(completion: { (session, error) in
+        TWTRTwitter.sharedInstance().logIn(completion: { (session, error) in
             
             if let session = session {
                 TwitterWrapper.getInstance().setSession(session:session)

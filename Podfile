@@ -9,5 +9,6 @@ target 'Nyan' do
 
   # Pods for Nyan
   pod 'TwitterKit'
+  pod 'TwitterCore'
 
 end

@@ -77,11 +77,11 @@ class TimeLineViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "読み込み")
-        self.refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(TimeLineViewController.refresh), for: UIControl.Event.valueChanged)
         self.tableView.addSubview(refreshControl)
         
         self.tableView.estimatedRowHeight = 400.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
 
         self.refreshControl.beginRefreshing()
         refresh()
