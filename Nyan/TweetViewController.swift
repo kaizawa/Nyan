@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Social
 import Accounts
-import TwitterKit
+import Swifter
 
 class TweetViewController : UIViewController {
     
@@ -24,7 +24,7 @@ class TweetViewController : UIViewController {
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     let config:Config = Config.sharedInstance
-    var tweet: [String: Any]?
+    var tweet: JSON = nil
     var retweeted = false
     let semaphore = DispatchSemaphore(value: 1)
     var image: UIImage?
@@ -48,16 +48,16 @@ class TweetViewController : UIViewController {
     
     override func viewDidLoad() {
         
-        let user = tweet?["user"] as? [String:Any]
+        let user = tweet["user"]
 
-        self.name?.text = user?["name"] as? String
-        self.screenName?.text = user?["screen_name"] as? String
-        self.textView?.text = tweet?["text"] as? String
+        self.name?.text = user["name"].string
+        self.screenName?.text = user["screen_name"].string
+        self.textView?.text = tweet["text"].string
         self.textView?.dataDetectorTypes = .link
         //self.titleText?.title = (user?["name"] as? String)! + "のツイート"
         
         // アイコンのURLをとってきてプロトコルをHTTPに変更
-        let urlString = user?["profile_image_url_https"] as! String
+        let urlString = user["profile_image_url_https"].string!
         // キャッシュしているアイコンを取得
         if let cacheImage = config.iconCache.object(forKey: urlString as AnyObject) {
             // キャッシュ画像の設定
@@ -71,18 +71,8 @@ class TweetViewController : UIViewController {
         }
         
         // ツイート内の画像(Twitterに送信された画像)
-        if let entities = tweet?["entities"] as? [String:Any]
-        {
-            if let urls = entities["urls"] as? [AnyObject]
-            {
-                for urlsEntity in urls
-                {
-                    if let urlString = urlsEntity["expanded_url"]
-                    {
-                        url = URL(string: urlString as! String)
-                    }
-                }
-            }
+        if let imageUrlString = tweet["entities"]["urls"]["expanded_url"].string {
+            url = URL(string: imageUrlString)
         }
     }
     
@@ -93,48 +83,16 @@ class TweetViewController : UIViewController {
             self.handleError(msg: "もうリツイートしたにゃん\n")
             return
         }
-        
-        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
-            
-            if error != nil {
-                self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
-                self.semaphore.signal()
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                if(response.statusCode != 200)
-                {
-                    if(response.statusCode == 403)
-                    {
-                        self.handleError(msg: "もうリツイートしたにゃん\n")
-                        self.retweeted = true
-                        self.semaphore.signal()
-                        return
-                    }
-                    
-                    self.handleError(msg: "エラーだにゃん\n\nHTTP\(response.statusCode)")
-                    self.semaphore.signal()
-                    return
-                }
-            }
-            
+ 
+        let id = tweet["id_str"].string!
+
+        TwitterWrapper.getInstance().retweetTweet(forID: id, success: { status in
+
             self.retweeted = true
             self.handleError(msg: "リツートしたにゃん")
-            self.semaphore.signal()
-        }
-        
-        let errorHandler: ErrorHandler = {
-            
-            (message:String?) -> Void in
-            self.setLabel(text: message!)
-        }
-        
-        TwitterWrapper.getInstance().retweet(
-            tweet: tweet,
-            handler: requestHandler,
-            errorHandler: errorHandler,
-            semaphore: self.semaphore)
+        }, failure: { error in
+            self.handleError(msg: "エラーだにゃん\n\nHTTP\(error.localizedDescription)")
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -146,38 +104,16 @@ class TweetViewController : UIViewController {
     }
     
     @IBAction func sendLike(_ sender: Any) {
-        
-        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
-            
-            if error != nil {
-                self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
-                self.semaphore.signal()
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                if(response.statusCode != 200) {
-                    
-                    self.handleError(msg: "エラーだにゃん\n\nHTTP\(response.statusCode)")
-                    self.semaphore.signal()
-                    return
-                }
-            }
-            
-            self.handleError(msg: "いいね！したにゃん")
-            self.semaphore.signal()
-        }
 
-        let errorHandler: ErrorHandler = {
-            
-            (message:String?) -> Void in
-            self.setLabel(text: message!)
-        }
-        
-        TwitterWrapper.getInstance().sendLike(
-            tweet: tweet,
-            handler: requestHandler,
-            errorHandler: errorHandler,
-            semaphore: self.semaphore)
+        let id = tweet["id_str"].string!
+
+        TwitterWrapper.getInstance().favoriteTweet(forID: id, success: { status in
+
+            self.retweeted = true
+            self.setLabel(text: "いいね！したにゃん")
+        }, failure: { error in
+            self.handleError(msg: "エラーだにゃん\n\nHTTP\(error.localizedDescription)")
+        })
+
     }
 }

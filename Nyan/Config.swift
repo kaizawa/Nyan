@@ -20,6 +20,8 @@ class Config {
     var image:UIImage?
     var mediaId:String?
     var scheduledDate:Date?
+    var tokenKey:String?
+    var tokenSecret:String?
     
     static let TWEET_ON_BOOT_NAME:String = "tweetOnBoot"
     static let AUTO_EXIT_NAME:String = "autoExit"
@@ -27,6 +29,9 @@ class Config {
     static let ACCOUNT_NAME:String = "account"
     static let IMAGE_NAME:String = "image"
     static let MEDIA_ID_NAME:String = "media_ids"
+    static let TOKEN_KEY:String = "token_key"
+    static let TOKEN_SECRET:String = "token_secret"
+    
     let DEFAULT_STATUS:String = "にゃーん"
     var iconCache = NSCache<AnyObject, UIImage>()
     
@@ -69,6 +74,32 @@ class Config {
             mediaId = userDefaults.string(forKey: Config.MEDIA_ID_NAME)!
         }
         scheduledDate = nil
+        
+        if(userDefaults.object(forKey: Config.TOKEN_KEY) == nil) {
+            tokenKey = nil
+        } else {
+            tokenKey = userDefaults.string(forKey: Config.TOKEN_KEY)!
+        }
+        
+        if(userDefaults.object(forKey: Config.TOKEN_SECRET) == nil) {
+            tokenSecret = nil
+        } else {
+            tokenSecret =  userDefaults.string(forKey: Config.TOKEN_SECRET)!
+        }
+    }
+    
+    func setTokenKey(_ newVal:String){
+
+        tokenKey = newVal
+        userDefaults.set(tokenKey, forKey: Config.TOKEN_KEY)
+        userDefaults.synchronize()
+    }
+    
+    func setTokenSecret(_ newVal:String){
+
+        tokenSecret = newVal
+        userDefaults.set(tokenSecret, forKey: Config.TOKEN_SECRET)
+        userDefaults.synchronize()
     }
     
     func setScheduledDate(_ newVal:Date?) {

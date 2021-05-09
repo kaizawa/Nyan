@@ -8,7 +8,8 @@ target 'Nyan' do
   use_frameworks!
 
   # Pods for Nyan
-  pod 'TwitterKit'
-  pod 'TwitterCore'
+  #pod 'TwitterKit'
+  #pod 'TwitterCore'
+  pod 'Swifter', :git => 'https://github.com/mattdonnelly/Swifter.git'
 
 end

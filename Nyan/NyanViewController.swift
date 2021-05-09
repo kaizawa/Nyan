@@ -9,7 +9,6 @@ import UIKit
 import Social
 import Accounts
 import Foundation
-import TwitterKit
 
 class NyanViewController: UIViewController {
     
@@ -112,35 +111,18 @@ class NyanViewController: UIViewController {
     
     func sendNyan () -> Void
     {
-        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
-            
-            if error != nil {
-                self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
-                print(String(describing: error))
-                self.semaphore.signal()
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse  {
-                if(response.statusCode != 200) {
-                    
-                    self.handleError(msg: "エラーだにゃん\n\nHTTP\(response.statusCode)")
-                    self.semaphore.signal()
-                    return
-                }
-            }
-            self.semaphore.signal()
+         let id:UInt32! = arc4random();
+        var mediaIDs:[String] = []
+        if(config.mediaId != nil) {
+            // メディアIDを追加
+            mediaIDs.append(config.mediaId ?? "")
         }
+        TwitterWrapper.getInstance().postTweet(status: Config.sharedInstance.status, inReplyToStatusID: String(id), mediaIDs: mediaIDs, success: { status in
+            
+            self.setLabel(text: Config.sharedInstance.status)
+        }, failure: { error in
+            self.handleError(msg: "エラーだにゃん\n\nHTTP\(error.localizedDescription)")
 
-        let errorHandler: ErrorHandler = {
-            
-            (message:String?) -> Void in
-                self.setLabel(text: message!)
-        }
-        
-        TwitterWrapper.getInstance().sendStatus(
-            handler: requestHandler,
-            errorHandler: errorHandler,
-            semaphore: self.semaphore)
+        })
     }
 }

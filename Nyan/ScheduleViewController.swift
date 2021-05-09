@@ -12,17 +12,25 @@ import UIKit
 class ScheduleViewController: UIViewController {
 
     let config:Config = Config.sharedInstance
-    @IBOutlet weak var datePicker: UIDatePicker!
     static var workItem: DispatchWorkItem?
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+            
+        if #available(iOS 13.4, *){
+            //todo: can't set text color to white.
+            //Thus, setting BG color of ScheduleViewController to white and set text color to black for now.
+            datePicker.setValue(UIColor.black, forKey: "textColor")
+            datePicker.preferredDatePickerStyle = .wheels
+            datePicker.setValue(true, forKey: "highlightsToday")
+        }
         
-        datePicker.setValue(UIColor.white, forKey: "textColor")
-        datePicker.setValue(false, forKey: "highlightsToday")
-        
+        if #available(iOS 14.0, *){
+            datePicker.preferredDatePickerStyle = .inline
+        }
     }
     
     @IBAction func saveAction(_ sender: Any) {
@@ -39,9 +47,13 @@ class ScheduleViewController: UIViewController {
             if let scheduledDate = self.config.scheduledDate  {
                 
                 if (scheduledDate.timeIntervalSinceNow <= 0 ) {
-                    let storyboard: UIStoryboard = self.storyboard!
-                    let nyanView = storyboard.instantiateViewController(withIdentifier: "nyan") as! NyanViewController
-                    nyanView.sendNyan()
+                    // storyboard must be called from main thread
+                    DispatchQueue.main.async
+                    {
+                        let storyboard: UIStoryboard = self.storyboard!
+                        let nyanView = storyboard.instantiateViewController(withIdentifier: "nyan") as! NyanViewController
+                        nyanView.sendNyan()
+                    }
                     
                     DispatchQueue.main.async {
                         
@@ -59,6 +71,4 @@ class ScheduleViewController: UIViewController {
             self.present(nextView, animated: false, completion: nil)
         }
     }
-    
-    
 }

@@ -11,7 +11,6 @@ import UIKit
 import AVFoundation
 import Accounts
 import Social
-import TwitterKit
 
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
         
@@ -100,43 +99,21 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     func getMediaId()
-    {
-        let requestHandler: TWTRNetworkCompletion = { (response: URLResponse?, data: Data?, error: Error?)  in
-            
-            if error != nil {
-                self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
-                print(error!)
-                self.semaphore.signal()
-                return
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(
-                        with: data!, options: .allowFragments) as! NSDictionary
-                    
-                    let mediaId = json.object(forKey:"media_id_string") as! String
+    {        
+        let imageData = config.image!.jpegData(compressionQuality: 1)
+        
+        guard let _ = imageData else {
+            self.handleError(msg: "写真データないにゃん")
+            return
+        }
+
+        TwitterWrapper.getInstance().postMedia(imageData ?? Data(), success: { json in
+                    let mediaId = json["media_id_string"].string
                     self.config.setMediaId(mediaId)
-                    self.semaphore.signal()
-                    return
-                    
-                }  catch let error as NSError {
+                }, failure: { error in
+                    // 失敗時の処理
                     self.handleError(msg: "エラーだにゃん\n\(String(describing: error))")
-                    self.semaphore.signal()
-                    return
-                }
-            }
-        }
-        
-        let errorHandler: ErrorHandler = {
-            
-            (message:String?) -> Void in
-            self.setLabel(text: message!)
-        }
-        
-        TwitterWrapper.getInstance().uploadMedia(
-            handler: requestHandler,
-            errorHandler: errorHandler,
-            semaphore: self.semaphore)
- 
+                })
     }
     
     @IBAction func takeShot(_ sender: UIBarButtonItem) {

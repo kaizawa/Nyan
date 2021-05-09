@@ -13,21 +13,33 @@
 		8A26ED601EB4B01500E80A8A /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A26ED5F1EB4B01500E80A8A /* DefaultViewController.swift */; };
 		8A28FEA61F664D670027E921 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A28FEA51F664D670027E921 /* ScheduleViewController.swift */; };
 		8A2F67F91E7E1B38007C27EF /* NyanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2F67F81E7E1B38007C27EF /* NyanViewController.swift */; };
-		8A34ABD7260730D800548770 /* Pods_Nyan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA4843FA24A44F329C5C730 /* Pods_Nyan.framework */; };
-		8A34ABDA260730DC00548770 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AFF16971E7E1014001FE04E /* Twitter.framework */; };
 		8A563EE81F19B6D8009BB8FD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A563EE71F19B6D8009BB8FD /* Launch Screen.storyboard */; };
 		8A7B69371EFF7DA700A5D209 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B69361EFF7DA700A5D209 /* TimeLineViewController.swift */; };
 		8A7B69391F0D2C5100A5D209 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B69381F0D2C5100A5D209 /* TweetCell.swift */; };
 		8A7B693B1F11EDB600A5D209 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B693A1F11EDB600A5D209 /* TweetViewController.swift */; };
 		8A7B693D1F1223F500A5D209 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7B693C1F1223F500A5D209 /* ReplyViewController.swift */; };
 		8AD833911F40799300409371 /* TwitterWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD833901F40799300409371 /* TwitterWrapper.swift */; };
+		8AF473432640F72A00CC90D3 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8AF473422640F72A00CC90D3 /* README.txt */; };
 		8AFF16851E7E0E41001FE04E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF16841E7E0E41001FE04E /* AppDelegate.swift */; };
 		8AFF168A1E7E0E41001FE04E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF16881E7E0E41001FE04E /* Main.storyboard */; };
 		8AFF168C1E7E0E41001FE04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF168B1E7E0E41001FE04E /* Assets.xcassets */; };
+		BEB65894FC0B2D504EA2D8DC /* Pods_Nyan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A08E42DC8ED037F4EE5FECD8 /* Pods_Nyan.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8AF473472640F82C00CC90D3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		7CA4843FA24A44F329C5C730 /* Pods_Nyan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nyan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A24936A1F40102200C5CE97 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		8A26ED5B1EB44B1700E80A8A /* ConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		8A26ED5D1EB4877B00E80A8A /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -41,13 +53,14 @@
 		8A7B693C1F1223F500A5D209 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		8A9C7AC01FF499F300E86903 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		8AD833901F40799300409371 /* TwitterWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterWrapper.swift; sourceTree = "<group>"; };
+		8AF473422640F72A00CC90D3 /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		8AFF16811E7E0E41001FE04E /* Nyan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nyan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AFF16841E7E0E41001FE04E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AFF16891E7E0E41001FE04E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8AFF168B1E7E0E41001FE04E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8AFF16901E7E0E41001FE04E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AFF16971E7E1014001FE04E /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		9FA7AFF296D4A018EE45723C /* Pods-Nyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nyan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nyan/Pods-Nyan.release.xcconfig"; sourceTree = "<group>"; };
+		A08E42DC8ED037F4EE5FECD8 /* Pods_Nyan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nyan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE6DC17E23590A75C8FC7E34 /* Pods-Nyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nyan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nyan/Pods-Nyan.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,8 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A34ABDA260730DC00548770 /* Twitter.framework in Frameworks */,
-				8A34ABD7260730D800548770 /* Pods_Nyan.framework in Frameworks */,
+				BEB65894FC0B2D504EA2D8DC /* Pods_Nyan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +122,7 @@
 				8A7B69381F0D2C5100A5D209 /* TweetCell.swift */,
 				8A7B693A1F11EDB600A5D209 /* TweetViewController.swift */,
 				8AD833901F40799300409371 /* TwitterWrapper.swift */,
+				8AF473422640F72A00CC90D3 /* README.txt */,
 			);
 			path = Nyan;
 			sourceTree = "<group>";
@@ -118,8 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				8A9C7AC01FF499F300E86903 /* SafariServices.framework */,
-				8AFF16971E7E1014001FE04E /* Twitter.framework */,
-				7CA4843FA24A44F329C5C730 /* Pods_Nyan.framework */,
+				A08E42DC8ED037F4EE5FECD8 /* Pods_Nyan.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,11 +144,11 @@
 			buildConfigurationList = 8AFF16931E7E0E41001FE04E /* Build configuration list for PBXNativeTarget "Nyan" */;
 			buildPhases = (
 				9476302B670B879C3FD531B9 /* [CP] Check Pods Manifest.lock */,
-				8AFF167F1E7E0E41001FE04E /* Resources */,
 				8AFF167E1E7E0E41001FE04E /* Frameworks */,
-				2CC4BC011985A0AF6A75195D /* [CP] Copy Pods Resources */,
-				1D980042DE52E625CA71B1E7 /* [CP] Embed Pods Frameworks */,
+				8AFF167F1E7E0E41001FE04E /* Resources */,
+				8AF473472640F82C00CC90D3 /* Embed Frameworks */,
 				8AFF167D1E7E0E41001FE04E /* Sources */,
+				557D4933A275F802C0B046D0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -190,6 +202,7 @@
 			files = (
 				8A563EE81F19B6D8009BB8FD /* Launch Screen.storyboard in Resources */,
 				8AFF168C1E7E0E41001FE04E /* Assets.xcassets in Resources */,
+				8AF473432640F72A00CC90D3 /* README.txt in Resources */,
 				8AFF168A1E7E0E41001FE04E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,42 +210,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D980042DE52E625CA71B1E7 /* [CP] Embed Pods Frameworks */ = {
+		557D4933A275F802C0B046D0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Nyan/Pods-Nyan-frameworks.sh",
-				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Swifter/Swifter.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swifter.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nyan/Pods-Nyan-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2CC4BC011985A0AF6A75195D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Nyan/Pods-Nyan-resources.sh",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nyan/Pods-Nyan-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9476302B670B879C3FD531B9 /* [CP] Check Pods Manifest.lock */ = {

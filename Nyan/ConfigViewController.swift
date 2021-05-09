@@ -8,7 +8,9 @@
 
 import UIKit
 import Accounts
-import TwitterKit
+import SafariServices
+import AuthenticationServices
+import Swifter
 
 class ConfigViewController: UIViewController, UITextFieldDelegate  {
         
@@ -20,21 +22,83 @@ class ConfigViewController: UIViewController, UITextFieldDelegate  {
     @IBOutlet weak var deleteImageButton: UIButton!
     @IBOutlet weak var scheduleSwitch: UISwitch!
     @IBOutlet weak var scheduleDateLabel: UILabel!
-    
+
+    private var jsonResult: [JSON] = []
+
     @IBAction func accountAction(_ sender: UITextField) {
         
-        TWTRTwitter.sharedInstance().logIn(completion: { (session, error) in
-            
-            if let session = session {
-                TwitterWrapper.getInstance().setSession(session:session)
-                self.account.text = session.userName
-            }
-        })
+        // You can change the authorizationMode to test different results via the AppDelegate
+        switch authorizationMode
+        {
+        case .browser:
+            authorizeWithWebLogin()
+        case .sso:
+            authorizeWithSSO()
+        }       
     }
-    
+
+    private func authorizeWithWebLogin() {
+        // this URL is registered in https://developer.twitter.com/en/apps/14625937
+        let callbackUrl = URL(string: "swifter-JVnDZmANHjkzU1Tx4awnXw6B0://")!
+        if #available(iOS 13.0, *) {
+            
+            TwitterWrapper.getInstance().authorize(withProvider: self, callbackURL: callbackUrl) { _, _ in
+                if let accessToken = TwitterWrapper.getInstance().client.credential?.accessToken
+                {
+                    Config.sharedInstance.setTokenKey(accessToken.key)
+                    Config.sharedInstance.setTokenSecret(accessToken.secret)
+                    
+                    if(TwitterWrapper.getInstance().client.credential != nil &&
+                        TwitterWrapper.getInstance().client.credential?.accessToken != nil)
+                    {
+                        let account = TwitterWrapper.getInstance().client.credential?.accessToken?.screenName ?? ""
+                        Config.sharedInstance.setAccount(account)
+                        self.account.text = account
+                    }
+                }
+
+            } failure: { error in
+                self.alert(title: "Error", message: error.localizedDescription)
+            }
+        } else {
+            TwitterWrapper.getInstance().authorize(withCallback: callbackUrl, presentingFrom: self) { _, _ in
+                self.fetchTwitterHomeStream()
+            } failure: { error in
+                self.alert(title: "Error", message: error.localizedDescription)
+            }
+        }
+    }
+
+    private func authorizeWithSSO() {
+        TwitterWrapper.getInstance().authorizeSSO { _ in
+            if let accessToken = TwitterWrapper.getInstance().client.credential?.accessToken {
+                Config.sharedInstance.setTokenKey(accessToken.key)
+                Config.sharedInstance.setTokenSecret(accessToken.secret)
+            }
+        } failure: { error in
+            self.alert(title: "Error", message: error.localizedDescription)
+        }
+    }
+
+    private func fetchTwitterHomeStream() {
+        TwitterWrapper.getInstance().getHomeTimeline(count: 20) { json in
+            // Successfully fetched timeline, so lets create and push the table view
+            self.jsonResult = json.array ?? []
+            self.performSegue(withIdentifier: "showTweets", sender: self)
+        } failure: { error in
+            self.alert(title: "Error", message: error.localizedDescription)
+        }
+    }
+
+    private func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+      
     @IBAction func timeLineButtonAction(_ sender: UIBarButtonItem)
     {
-        config.setAccount(self.account.text!)
+//        config.setAccount(self.account.text!)
         config.setStatus(self.status.text!)
         let nextView = self.storyboard!.instantiateViewController(withIdentifier: "timeline") as! TimeLineViewController
         
@@ -58,7 +122,6 @@ class ConfigViewController: UIViewController, UITextFieldDelegate  {
     
     @IBAction func scheduleSwitchAction(_ sender: UISwitch)
     {
-        config.setAccount(self.account.text!)
         config.setStatus(self.status.text!)
         
         if(sender.isOn)
@@ -113,9 +176,9 @@ class ConfigViewController: UIViewController, UITextFieldDelegate  {
         tweetOnBoot.isOn = config.tweetOnBoot
         status.text = config.status
         
-        if let session = TwitterWrapper.getInstance().getSession() {
-
-            account.text = session.userName
+        if (config.tokenKey != nil && config.tokenSecret != nil && config.account != nil)
+        {
+            account.text = config.account
         }
         else {            
            account.text = "アカウントがありません"
@@ -143,7 +206,7 @@ class ConfigViewController: UIViewController, UITextFieldDelegate  {
             DispatchQueue.main.async() {
                 
                 self.scheduleSwitch.isOn = false
-                self.scheduleDateLabel.isHidden = true
+                self.scheduleDateLabel.isHidden  = true
                 self.autoExit.isEnabled = true
             }
         }
@@ -198,7 +261,7 @@ class ConfigViewController: UIViewController, UITextFieldDelegate  {
     
     @IBAction func tweetButtonAction(_ sender: Any) {
         
-        config.setAccount(self.account.text!)
+//        config.setAccount(self.account.text!)
         config.setStatus(self.status.text!)
         
         let storyboard: UIStoryboard = self.storyboard!
@@ -234,5 +297,18 @@ class ConfigViewController: UIViewController, UITextFieldDelegate  {
 
         self.view.endEditing(true)
     }
+}
 
+extension ConfigViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+// This is need for ASWebAuthenticationSession
+@available(iOS 13.0, *)
+extension ConfigViewController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return self.view.window!
+    }
 }

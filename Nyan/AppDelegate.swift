@@ -7,7 +7,18 @@
 //
 
 import UIKit
-import TwitterKit
+import Swifter
+
+enum AuthorizationMode {
+    case browser
+    case sso
+    
+    var isUsingSSO: Bool {
+        return self == .browser
+    }
+}
+
+let authorizationMode: AuthorizationMode = .browser
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,14 +27,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundTaskIdentifier : UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    {
         // Override point for customization after application launch.
-        TWTRTwitter.sharedInstance().start(withConsumerKey:"JVnDZmANHjkzU1Tx4awnXw6B0", consumerSecret:"bKYMHvYMXEDmCP1fYFmm3cY4Pegpm0QFsgEGY2dD4cZjCcmjUB")
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool
+    {
+        // this URL is registered in https://developer.twitter.com/en/apps/14625937
+        if authorizationMode.isUsingSSO {
+
+            let callbackUrl = URL(string: "swifter-JVnDZmANHjkzU1Tx4awnXw6B0://")!
+            Swifter.handleOpenURL(url, callbackURL: callbackUrl, isSSO: true)
+        } else {
+            let callbackUrl = URL(string: "swifter-JVnDZmANHjkzU1Tx4awnXw6B0://")!
+            Swifter.handleOpenURL(url, callbackURL: callbackUrl)
+        }
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

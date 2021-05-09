@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2sQ-8f-VFR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2sQ-8f-VFR">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -222,7 +222,7 @@
                         <viewControllerLayoutGuide type="bottom" id="SUq-ZJ-cwG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6kP-7G-VXB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="r7w-7Y-Vjm">
@@ -234,7 +234,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tweetCell" rowHeight="300" id="X19-Ej-b55" customClass="TweetCell" customModule="Nyan" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="300"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X19-Ej-b55" id="q5u-La-hnf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
@@ -354,7 +354,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RaQ-ws-UyR">
-                                <rect key="frame" x="0.0" y="603" width="375" height="44"/>
+                                <rect key="frame" x="1" y="603" width="375" height="43"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="J4W-xk-M5W"/>
@@ -382,9 +382,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJL-ky-OHd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJL-ky-OHd">
                                 <rect key="frame" x="30" y="202" width="0.0" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -396,8 +395,11 @@
                             <constraint firstItem="vdZ-w9-kj9" firstAttribute="top" secondItem="1OK-UG-Htl" secondAttribute="top" constant="20" id="CwC-vG-sLc"/>
                             <constraint firstItem="vdZ-w9-kj9" firstAttribute="leading" secondItem="1OK-UG-Htl" secondAttribute="leading" id="IPV-Ox-UZ8"/>
                             <constraint firstItem="jSq-72-6A8" firstAttribute="leading" secondItem="1OK-UG-Htl" secondAttribute="leadingMargin" constant="10" id="ZH0-0r-BN2"/>
+                            <constraint firstItem="gJL-ky-OHd" firstAttribute="leading" secondItem="1OK-UG-Htl" secondAttribute="leadingMargin" constant="14" id="eqy-bR-WtK"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gJL-ky-OHd" secondAttribute="trailing" constant="20" symbolic="YES" id="glh-Cm-peS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jSq-72-6A8" secondAttribute="trailing" constant="10" id="pKd-VD-BlX"/>
                             <constraint firstAttribute="trailing" secondItem="vdZ-w9-kj9" secondAttribute="trailing" id="qyg-aN-ec0"/>
+                            <constraint firstItem="gJL-ky-OHd" firstAttribute="top" secondItem="1OK-UG-Htl" secondAttribute="top" constant="202" id="tdt-IA-Rfy"/>
                         </constraints>
                     </view>
                     <connections>
@@ -683,6 +685,7 @@
                             </toolbar>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="YCc-Kf-vwY">
                                 <rect key="frame" x="0.0" y="104" width="375" height="216"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </datePicker>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="REF-F5-J2w">
                                 <rect key="frame" x="0.0" y="10" width="375" height="44"/>
@@ -691,7 +694,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" systemColor="darkTextColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zDL-HL-Fbv" secondAttribute="trailing" id="3Kb-L0-zMY"/>
                             <constraint firstItem="zDL-HL-Fbv" firstAttribute="leading" secondItem="iUs-0k-WQu" secondAttribute="leading" id="5xS-sg-Bgz"/>
@@ -707,7 +710,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="datePicker" destination="YCc-Kf-vwY" id="JyI-dj-tC9"/>
+                        <outlet property="datePicker" destination="YCc-Kf-vwY" id="gEx-Pi-B27"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3f-Rw-Jm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -773,7 +776,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="brA-qg-MhP"/>
+        <segue reference="b5m-Lu-ZuM"/>
         <segue reference="lrw-yE-hHL"/>
     </inferredMetricsTieBreakers>
     <resources>

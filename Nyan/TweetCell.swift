@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Swifter
 
 class TweetCell: UITableViewCell {
     
@@ -19,7 +20,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     
     var userid: String?
-    var tweet: [String:Any]?
+    var tweet: JSON = nil
     var retweeted = false
     
     override func prepareForReuse() {
